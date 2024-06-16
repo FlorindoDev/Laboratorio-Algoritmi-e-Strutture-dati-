@@ -1,5 +1,5 @@
 # Laboratorio-Algoritmi-e-Strutture-dati
-#Italiano:
+# Italiano:
 Queste sono le mie tre prove intercorso di laboratorio di algoritmi e strutture dati. In queste prove implemento:
 
 - Vettori
@@ -11,12 +11,12 @@ Queste sono le mie tre prove intercorso di laboratorio di algoritmi e strutture 
 - Alberi Binari di Ricerca (BST) basati solo su puntatori
 - HashMap
 
-#Ottimizazioni da fare:
+# Ottimizazioni da fare:
   - nelle funzioni dei bst di cancellazione è da migliorare altrimenti il tempo di rimoszione è al piu Θ(log(n) + log(n))
   - Nelle Hashmap nel inserimento evitare di controlare se un elemento gia esiste. altrimenti scorro sicuramente tutta la hashmap seguendo la funzione di proping (Closing Hashing). trovare un modo per evitare di mettere doppioni senza controlare se gia esiste al momento del inserimento
 
 
-#Ingelse:
+# Ingelse:
 
 Here are my three lab midterm projects for algorithms and data structures. In these projects, I implemented:
 
