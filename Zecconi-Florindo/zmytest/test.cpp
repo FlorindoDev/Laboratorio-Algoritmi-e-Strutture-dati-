@@ -21,12 +21,12 @@ void mytest() {
   //uint ftestnum = 0, ftesterr = 0;
 
   loctestnum = 0; loctesterr = 0;
-  //TestFlorindoA(loctestnum, loctesterr);
+  TestFlorindoA(loctestnum, loctesterr);
 
   stestnum += loctestnum; stesterr += loctesterr;
 
   loctestnum = 0; loctesterr = 0;
-  //TestFlorindoB(loctestnum, loctesterr);
+  TestFlorindoB(loctestnum, loctesterr);
 
   stestnum += loctestnum; stesterr += loctesterr;
 
