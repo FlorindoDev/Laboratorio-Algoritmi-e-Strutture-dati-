@@ -110,24 +110,29 @@ namespace lasd {
     template <typename Data>
     Data BST<Data>::MinNRemove(){
         if(this->Empty()) throw std::length_error("Root vuota");
-        typename BinaryTreeLnk<Data>::NodeLnk * nod = FindPointerToMin(this->root);
+        //typename BinaryTreeLnk<Data>::NodeLnk * nod = FindPointerToMin(this->root);
+        typename BinaryTreeLnk<Data>::NodeLnk * nod = DetachMin(this->root,nullptr);
         if(nod == nullptr){
             throw std::length_error("Dato non trvato!");
         }
-        Data datReturn = nod->Element();
-        Remove(datReturn);
-        return datReturn;
+        //Data datReturn = nod->Element();
+        //Remove(datReturn);
+        size--;
+        return DataNDelete(nod);
 
     }
 
     template <typename Data>
     void BST<Data>::RemoveMin(){
         if(this->Empty()) throw std::length_error("Root vuota");
-        typename BinaryTreeLnk<Data>::NodeLnk * nod = FindPointerToMin(this->root);
+        //typename BinaryTreeLnk<Data>::NodeLnk * nod = FindPointerToMin(this->root);
+        typename BinaryTreeLnk<Data>::NodeLnk * nod = DetachMin(this->root,nullptr);
         if(nod == nullptr){
             throw std::length_error("Dato non trvato!");
         }
-        Remove(nod->Element());
+        //Remove(nod->Element());
+        size--;
+        DataNDelete(nod);
 
     }
 
@@ -142,24 +147,29 @@ namespace lasd {
     template <typename Data>
     void BST<Data>::RemoveMax(){
         if(this->Empty()) throw std::length_error("Root vuota");
-        typename BinaryTreeLnk<Data>::NodeLnk * nod = FindPointerToMax(this->root);
+        //typename BinaryTreeLnk<Data>::NodeLnk * nod = FindPointerToMax(this->root);
+        typename BinaryTreeLnk<Data>::NodeLnk * nod = DetachMax(this->root,nullptr);
         if(nod == nullptr){
             throw std::length_error("Dato non trvato!");
         }
-        Remove(nod->Element());
+        //Remove(nod->Element());
+        size--;
+        DataNDelete(nod);
 
     }
 
     template <typename Data>
     Data BST<Data>::MaxNRemove(){
         if(this->Empty()) throw std::length_error("Root vuota");
-        typename BinaryTreeLnk<Data>::NodeLnk * nod = FindPointerToMax(this->root);
+        //typename BinaryTreeLnk<Data>::NodeLnk * nod = FindPointerToMax(this->root);
+        typename BinaryTreeLnk<Data>::NodeLnk * nod = DetachMax(this->root,nullptr);
         if(nod == nullptr){
             throw std::length_error("Dato non trvato!");
         }
-        Data datReturn = nod->Element();
-        Remove(datReturn);
-        return datReturn;
+        //Data datReturn = nod->Element();
+        //Remove(datReturn);
+        size--;
+        return DataNDelete(nod);
 
     }
 
@@ -364,6 +374,38 @@ namespace lasd {
     template <typename Data>
     typename BinaryTreeLnk<Data>::NodeLnk * BST<Data>::DetachMin(typename BinaryTreeLnk<Data>::NodeLnk * FiglioNod, typename BinaryTreeLnk<Data>::NodeLnk * PadreNod){
         
+        if(FiglioNod->HasLeftChild()){
+           FiglioNod = DetachMin(&FiglioNod->LeftChild(),FiglioNod);
+        }else{
+            if(PadreNod == nullptr){
+                if(FiglioNod->IsLeaf()){
+                    root = nullptr;
+                }else{
+                    root = FiglioNod->FiglioDx;
+                }
+            }else if(FiglioNod->IsLeaf()){
+                if(PadreNod->HasRightChild() && (PadreNod->RightChild().Element() == FiglioNod->Element())){       //se il minimo è il figlio destro del padre allora dovro attacare il figlio destro del minimo al padre 
+                    PadreNod->FiglioDx = nullptr;
+
+                }else{
+                    PadreNod->FiglioSx=nullptr;
+                }
+                
+
+            }else{
+                if(PadreNod->HasRightChild() && (PadreNod->RightChild().Element() == FiglioNod->Element())){       //se il minimo è il figlio destro del padre allora dovro attacare il figlio destro del minimo al padre 
+                    PadreNod->FiglioDx = Skip2RightNoDel(FiglioNod);
+
+                }else{                                                              //se il minimo non è il figlio destro allora è il sinistro quindi attacato il figlio destro del minimo al figlio sinistro del padre del minimo                                                              
+                    PadreNod->FiglioSx = Skip2RightNoDel(FiglioNod);
+                }
+            }
+
+        }
+        
+        return FiglioNod;
+        
+        /*
         if(!FiglioNod->IsLeaf()){
             if(FiglioNod->HasLeftChild()) {                                     
                 FiglioNod = DetachMin(&FiglioNod->LeftChild(),FiglioNod);                   //ricerca del minimo , vado sempre a sinistra
@@ -403,12 +445,45 @@ namespace lasd {
         }
 
         return FiglioNod;
+        */
 
     }
 
     template <typename Data>
     typename BinaryTreeLnk<Data>::NodeLnk * BST<Data>::DetachMax(typename BinaryTreeLnk<Data>::NodeLnk * FiglioNod, typename BinaryTreeLnk<Data>::NodeLnk * PadreNod){
         
+        if(FiglioNod->HasRightChild()){
+           FiglioNod = DetachMax(&FiglioNod->RightChild(),FiglioNod);
+        }else{
+            if(PadreNod == nullptr){
+                if(FiglioNod->IsLeaf()){
+                    root = nullptr;
+                }else{
+                    root = FiglioNod->FiglioSx;
+                }
+            }else if(FiglioNod->IsLeaf()){
+                if(PadreNod->HasLeftChild() && (PadreNod->LeftChild().Element() == FiglioNod->Element())){       //se il minimo è il figlio destro del padre allora dovro attacare il figlio destro del minimo al padre 
+                    PadreNod->FiglioSx = nullptr;
+
+                }else{
+                    PadreNod->FiglioDx=nullptr;
+                }
+                
+
+            }else{
+                if(PadreNod->HasLeftChild() && (PadreNod->LeftChild().Element() == FiglioNod->Element())){       //se il minimo è il figlio destro del padre allora dovro attacare il figlio destro del minimo al padre 
+                    PadreNod->FiglioSx = Skip2LeftNoDel(FiglioNod);
+
+                }else{                                                              //se il minimo non è il figlio destro allora è il sinistro quindi attacato il figlio destro del minimo al figlio sinistro del padre del minimo                                                              
+                    PadreNod->FiglioDx = Skip2LeftNoDel(FiglioNod);
+                }
+            }
+
+        }
+        
+        return FiglioNod;
+        
+        /*
         if(!FiglioNod->IsLeaf()){
             if(FiglioNod->HasRightChild()) {                                                //ricerca del massimo
 
@@ -448,6 +523,7 @@ namespace lasd {
         }
 
         return FiglioNod;
+        */
 
     }
 
