@@ -12,7 +12,6 @@ Queste sono le mie tre prove intercorso di laboratorio di algoritmi e strutture 
 - HashMap
 
 # Ottimizazioni da fare:
-  - nelle funzioni dei bst la cancellazione è da migliorare altrimenti il tempo di rimozione è al piu Θ(log(n) + log(n))
   - Nelle Hashmap nel inserimento è da evitare di controlare se un elemento gia esiste. altrimenti scorro sicuramente tutta la hashmap seguendo la funzione di proping (Closing Hashing). trovare un modo per evitare di mettere doppioni senza controlare se gia esiste al momento del inserimento
 
 
