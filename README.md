@@ -1,3 +1,16 @@
+## 📖 Contenuto della Libreria
+
+La libreria include esempi sul C++ e varie implementazioni di strutture dati:
+
+1. **Vector e List** 📏
+2. **Stack e Queue** 🗃️
+3. **Alberi Binari** 🌳
+4. **Alberi Binari di Ricerca** 🔍
+5. **HashMap** 💱
+
+**Voto**: 30
+
+
 # Laboratorio-Algoritmi-e-Strutture-dati
 # Italiano:
 Queste sono le mie tre prove intercorso di laboratorio di algoritmi e strutture dati. In queste prove implemento:
